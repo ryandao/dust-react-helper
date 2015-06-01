@@ -8,6 +8,10 @@
   },
   "author": "Ryan Dao",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryandao/dust-react-helper.git"
+  },
   "dependencies": {
     "node-jsx": "^0.13.3",
     "react": "^0.13.3"
