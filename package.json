@@ -1,0 +1,19 @@
+{
+  "name": "dust-react-helper",
+  "version": "1.0.0",
+  "description": "Helper to render React component in DustJS template",
+  "main": "helper.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test/helper_test.js"
+  },
+  "author": "Ryan Dao",
+  "license": "ISC",
+  "dependencies": {
+    "node-jsx": "^0.13.3",
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "dustjs-linkedin": "^2.7.1",
+    "mocha": "^2.2.5"
+  }
+}
