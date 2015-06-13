@@ -30,7 +30,7 @@ module.exports = {
     require('node-jsx').install(jsx_opts);
 
     if(!cache_opts) {
-      cache_opts = {max: 2000}
+      cache_opts = {max: 2000, primitive: true}
     }
 
     renderComponent = memoize(function renderComponent(file, props) {
@@ -45,11 +45,14 @@ module.exports = {
       if (!props) {
         props = {};
       }
-      var intl = params.intl;
-      if (intl) {
-        props.locales = intl.locales;
-        props.messages = intl.messages;
+      for(var element in params) {
+        if (params.hasOwnProperty(element)) {
+          if (element !== 'component') {
+            props[element] = context.resolve(params[element]);
+          }
+        }
       }
+
       var markup = renderComponent(file, props);
       chunk.write(markup);
       return chunk;
