@@ -42,6 +42,10 @@ module.exports = {
     dust.helpers.react = function(chunk, context, bodies, params) {
       var file = params.component;
       var props = params.props;
+      if (!props) {
+        props = {};
+      }
+      props.intl = params.intl;
       var markup = renderComponent(file, props);
       chunk.write(markup);
       return chunk;
