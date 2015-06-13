@@ -45,7 +45,11 @@ module.exports = {
       if (!props) {
         props = {};
       }
-      props.intl = params.intl;
+      var intl = params.intl;
+      if (intl) {
+        props.locales = intl.locales;
+        props.messages = intl.messages;
+      }
       var markup = renderComponent(file, props);
       chunk.write(markup);
       return chunk;
