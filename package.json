@@ -4,7 +4,8 @@
   "description": "Helper to render React component in DustJS template",
   "main": "helper.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha test/helper_test.js"
+    "test": "./node_modules/.bin/mocha test/helper_test.js",
+    "benchmark": "./node_modules/.bin/matcha"
   },
   "author": "Ryan Dao",
   "license": "ISC",
