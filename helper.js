@@ -19,8 +19,9 @@ var getComponentFactory = memoize(function getComponentFactory(file) {
   return React.createFactory(component);
 });
 
-var renderComponent = memoize(function renderComponent(factory, props) {
-   return React.renderToString(factory(props))
+var renderComponent = memoize(function renderComponent(file, props) {
+  var factory = getComponentFactory(file);
+  return React.renderToString(factory(props))
 }, { max: 2000 })
 
 module.exports = {
@@ -28,8 +29,7 @@ module.exports = {
     dust.helpers.react = function(chunk, context, bodies, params) {
       var file = params.component;
       var props = params.props;
-      var factory = getComponentFactory(file);
-      var markup = renderComponent(factory, props);
+      var markup = renderComponent(file, props);
       chunk.write(markup);
       return chunk;
     };
