@@ -2,12 +2,12 @@
 
 var React = require('react');
 var path = require('path');
-require('node-jsx').install();
 
 var reactDir;
 
 var memoize = require('memoizee');
 
+var renderComponent;
 var getComponentFactory = memoize(function getComponentFactory(file) {
   var component;
 
@@ -19,13 +19,26 @@ var getComponentFactory = memoize(function getComponentFactory(file) {
   return React.createFactory(component);
 });
 
-var renderComponent = memoize(function renderComponent(file, props) {
-  var factory = getComponentFactory(file);
-  return React.renderToString(factory(props))
-}, { max: 2000 })
-
 module.exports = {
-  install: function(dust) {
+
+  clearCache: function() {
+    getComponentFactory.clear();
+    renderComponent.clear();
+  },
+
+  install: function(dust, jsx_opts, cache_opts) {
+    require('node-jsx').install(jsx_opts);
+
+    if(!cache_opts) {
+      cache_opts = {max: 2000}
+    }
+
+    renderComponent = memoize(function renderComponent(file, props) {
+      var factory = getComponentFactory(file);
+      return React.renderToString(factory(props))
+    }, cache_opts)
+
+
     dust.helpers.react = function(chunk, context, bodies, params) {
       var file = params.component;
       var props = params.props;
