@@ -26,4 +26,39 @@ And then the helper will pick up components relative to the configured react dir
 
     {@react component="my_component" /}
 
+### Using .jsx instead of .js or Harmony for your components
 
+When you install dust-react-helper, the first paramater is passed to the jsx
+compiler, so it you want to use .jsx you can install it with these paramaters:
+
+    var dust = require('dustjs-linkedin');
+    require('dust-react-helper').install(dust, {extension: '.jsx'});
+
+And then inside of your Dust template:
+
+    {@react component="./react/my_component.jsx" /}
+
+Similarly, if you want to use [ES6 transforms](https://github.com/facebook/jstransform/tree/master/visitors) 
+    var dust = require('dustjs-linkedin');
+    require('dust-react-helper').install(dust, {harmony: true});
+
+### Internal cache
+
+`React.renderToString` is slow compared to the rest of Dust.  dust-react-helper 
+contains an internal cache to store pre-transformed versions of the helper nodes
+using [Memoizee](https://www.npmjs.com/package/memoizee).
+
+You can pass the paramaters when you install dust-react-helper:
+
+    var dust = require('dustjs-linkedin');
+    require('dust-react-helper').install(dust, undefined, {max: 2000});
+
+`{ max: 2000 }` will set the maximum number of cached jsx nodes to 2000.
+`{ maxAge: 1000 }` will set the maximum age to 1000 ms (one second)
+
+You can clear the internal cache like this:
+
+    var dust = require('dustjs-linkedin');
+    var helper = require('dust-react-helper');
+    helper.install(dust, undefined, {max: 2000});
+    helper.clearCache();
