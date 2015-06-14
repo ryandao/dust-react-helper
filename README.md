@@ -60,11 +60,13 @@ You can pass the paramaters when you install dust-react-helper:
 `{ max: 2000, primitive: true }` will set the maximum number of cached jsx nodes to 2000.
 `{ maxAge: 1000, primitive: true }` will set the maximum age to 1000 ms (one second)
 
-The `primitive: true` tells the cache to generate a hash out of the properties.  This makes the code several thousand percent faster.
-
 You can clear the internal cache like this:
 
     var dust = require('dustjs-linkedin');
     var helper = require('dust-react-helper');
     helper.install(dust, undefined, {max: 2000});
     helper.clearCache();
+
+The `primitive: true` tells the cache to generate a hash out of the properties.  If you are sending large JSON objects as paramaters, the cache can get confused.  If you remove that, it's about as fast as no cache at all.  You can locally remove the cache (useful if you are generating forms on the server side) with noCache=true inside of the dust helper like this:
+
+    {@react component="./react/my_component.jsx" noCache=true /}
