@@ -35,4 +35,20 @@ describe('dust-react-helper', function() {
       }
     });
   });
+
+  it('should error when given an invalid react component path', function() {
+    var compiled = dust.compile('{@react component="./test/heavy_metal" /}', 'metal');
+    dust.loadSource(compiled);
+    dust.render('metal', null, function(err, out) {
+      assert(err.code === 'MODULE_NOT_FOUND')
+    });
+  });
+
+  it('should error when a react component fails', function() {
+    var compiled = dust.compile('{@react component="./test/bad_component" /}', 'bad');
+    dust.loadSource(compiled);
+    dust.render('bad', null, function(err, out) {
+      assert(err.message === 'this component is broken');
+    });
+  });
 });
