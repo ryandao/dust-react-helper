@@ -27,3 +27,4 @@ And then the helper will pick up components relative to the configured react dir
     {@react component="my_component" /}
 
 
+**Thanks [@wirehead](https://github.com/wirehead) for the great contribution!**
