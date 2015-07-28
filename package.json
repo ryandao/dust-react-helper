@@ -14,6 +14,7 @@
     "url": "https://github.com/ryandao/dust-react-helper.git"
   },
   "dependencies": {
+    "memoizee": "^0.3.8",
     "node-jsx": "^0.13.3",
     "react": "^0.13.3"
   },
