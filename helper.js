@@ -24,15 +24,12 @@ var renderComponent = function renderComponent(file, props) {
 }
 
 module.exports = {
-
   clearCache: function() {
     getComponentFactory.clear();
     renderComponent.clear();
   },
 
-  install: function(dust, jsx_opts, cache_opts) {
-    require('node-jsx').install(jsx_opts);
-
+  install: function(dust, cache_opts) {
     if(!cache_opts) {
       cache_opts = {max: 2000, primitive: true}
     }

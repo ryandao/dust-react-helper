@@ -15,10 +15,10 @@
   },
   "dependencies": {
     "memoizee": "^0.3.8",
-    "node-jsx": "^0.13.3",
     "react": "^0.13.3"
   },
   "devDependencies": {
+    "babel": "^5.8.20",
     "dustjs-linkedin": "^2.7.1",
     "matcha": "^0.6.0",
     "mocha": "^2.2.5"

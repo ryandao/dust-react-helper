@@ -5,6 +5,8 @@ var helper = require('../helper');
 
 describe('dust-react-helper', function() {
   var dust;
+  require('babel/register');
+
   beforeEach(function() {
     dust = require('dustjs-linkedin');
   });

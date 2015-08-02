@@ -11,9 +11,14 @@ And just need to set it up with:
     var dust = require('dustjs-linkedin');
     require('dust-react-helper').install(dust);
 
+If you're using JSX syntax without prior compilation, include [`babel` Require Hook](https://babeljs.io/docs/usage/require) or [node-jsx](https://github.com/petehunt/node-jsx) before installing the helper:
+
+    require('babel/register'); // or
+    require('node-jsx').install()
+
 ### Usage
 
-The module registers a new `react` helper. You can call it directly in your Dust template like so:
+The module registers a new `@react` helper. You can call it directly in your Dust template like so:
 
     {@react component="./react/my_component" /}
 
@@ -29,22 +34,6 @@ And then the helper will pick up components relative to the configured react dir
 If you want to pass some paramaters to the component:
 
     {@react component="my_component" param1=param1 param2="spoon" param3="{param3}" component="param_component" /}
-
-### Using .jsx instead of .js or Harmony for your components
-
-When you install dust-react-helper, the first paramater is passed to the jsx
-compiler, so it you want to use .jsx you can install it with these paramaters:
-
-    var dust = require('dustjs-linkedin');
-    require('dust-react-helper').install(dust, {extension: '.jsx'});
-
-And then inside of your Dust template:
-
-    {@react component="./react/my_component.jsx" /}
-
-Similarly, if you want to use [ES6 transforms](https://github.com/facebook/jstransform/tree/master/visitors)
-    var dust = require('dustjs-linkedin');
-    require('dust-react-helper').install(dust, {harmony: true});
 
 ### Internal cache
 
