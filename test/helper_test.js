@@ -48,7 +48,7 @@ describe('dust-react-helper', function() {
     var compiled = dust.compile('{@react component="./test/bad_component" /}', 'bad');
     dust.loadSource(compiled);
     dust.render('bad', null, function(err, out) {
-      assert(err.message === 'this component is broken');
+      assert.notEqual(err, null);
     });
   });
 });
