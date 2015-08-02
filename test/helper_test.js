@@ -3,6 +3,7 @@
 var assert = require('assert');
 
 describe('dust-react-helper', function() {
+  require('babel/register');
   var dust = require('dustjs-linkedin');
   var helper = require('../helper');
   helper.install(dust);

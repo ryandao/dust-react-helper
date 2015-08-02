@@ -11,9 +11,13 @@ And just need to set it up with:
     var dust = require('dustjs-linkedin');
     require('dust-react-helper').install(dust);
 
+If you're using JSX syntax without prior compilation, include [`babel` Require Hook](https://babeljs.io/docs/usage/require) before installing the helper:
+
+    require('babel/register');
+
 ### Usage
 
-The module registers a new `react` helper. You can call it directly in your Dust template like so:
+The module registers a new `@react` helper. You can call it directly in your Dust template like so:
 
     {@react component="./react/my_component" /}
 

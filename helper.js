@@ -2,7 +2,6 @@
 
 var React = require('react');
 var path = require('path');
-require('node-jsx').install();
 
 var reactDir;
 
