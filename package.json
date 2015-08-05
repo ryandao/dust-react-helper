@@ -1,6 +1,6 @@
 {
   "name": "dust-react-helper",
-  "version": "1.0.1",
+  "version": "2.0.0-beta1",
   "description": "Helper to render React component in DustJS template",
   "main": "helper.js",
   "scripts": {
