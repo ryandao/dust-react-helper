@@ -7,7 +7,6 @@ var reactDir;
 
 var memoize = require('memoizee');
 
-var renderComponent;
 var getComponentFactory = memoize(function getComponentFactory(file) {
   var component;
 
@@ -18,6 +17,11 @@ var getComponentFactory = memoize(function getComponentFactory(file) {
   }
   return React.createFactory(component);
 });
+
+var renderComponent = function renderComponent(file, props) {
+  var factory = getComponentFactory(file);
+  return React.renderToString(factory(props))
+}
 
 module.exports = {
 
@@ -30,19 +34,31 @@ module.exports = {
     require('node-jsx').install(jsx_opts);
 
     if(!cache_opts) {
-      cache_opts = {max: 2000}
+      cache_opts = {max: 2000, primitive: true}
     }
 
-    renderComponent = memoize(function renderComponent(file, props) {
-      var factory = getComponentFactory(file);
-      return React.renderToString(factory(props))
-    }, cache_opts)
-
+    var renderComponent_memo =  memoize(renderComponent, cache_opts)
 
     dust.helpers.react = function(chunk, context, bodies, params) {
       var file = params.component;
       var props = params.props;
-      var markup = renderComponent(file, props);
+      if (!props) {
+        props = {};
+      }
+      for(var element in params) {
+        if (params.hasOwnProperty(element)) {
+          if (element !== 'component' && element !== 'noCache') {
+            props[element] = context.resolve(params[element]);
+          }
+        }
+      }
+
+      var markup;
+      if (params.hasOwnProperty('noCache')) {
+        markup = renderComponent(file, props);
+      } else {
+        markup = renderComponent_memo(file, props);
+      }
       chunk.write(markup);
       return chunk;
     };

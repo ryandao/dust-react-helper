@@ -26,6 +26,10 @@ And then the helper will pick up components relative to the configured react dir
 
     {@react component="my_component" /}
 
+If you want to pass some paramaters to the component:
+
+    {@react component="my_component" paramStyle=param immStyle="spoon" intStyle="{fork}" component="param_component" /}
+
 ### Using .jsx instead of .js or Harmony for your components
 
 When you install dust-react-helper, the first paramater is passed to the jsx
@@ -53,8 +57,8 @@ You can pass the paramaters when you install dust-react-helper:
     var dust = require('dustjs-linkedin');
     require('dust-react-helper').install(dust, undefined, {max: 2000});
 
-`{ max: 2000 }` will set the maximum number of cached jsx nodes to 2000.
-`{ maxAge: 1000 }` will set the maximum age to 1000 ms (one second)
+`{ max: 2000, primitive: true }` will set the maximum number of cached jsx nodes to 2000.
+`{ maxAge: 1000, primitive: true }` will set the maximum age to 1000 ms (one second)
 
 You can clear the internal cache like this:
 
@@ -62,5 +66,10 @@ You can clear the internal cache like this:
     var helper = require('dust-react-helper');
     helper.install(dust, undefined, {max: 2000});
     helper.clearCache();
+
+=======
+The `primitive: true` tells the cache to generate a hash out of the properties.  If you are sending large JSON objects as paramaters, the cache can get confused.  If you remove that, it's about as fast as no cache at all.  You can locally remove the cache (useful if you are generating forms on the server side) with noCache=true inside of the dust helper like this:
+
+    {@react component="./react/my_component.jsx" noCache=true /}
 
 **Thanks [@wirehead](https://github.com/wirehead) for the great contribution!**
