@@ -28,7 +28,7 @@ And then the helper will pick up components relative to the configured react dir
 
 If you want to pass some paramaters to the component:
 
-    {@react component="my_component" paramStyle=param immStyle="spoon" intStyle="{fork}" component="param_component" /}
+    {@react component="my_component" param1=param1 param2="spoon" param3="{param3}" component="param_component" /}
 
 ### Using .jsx instead of .js or Harmony for your components
 

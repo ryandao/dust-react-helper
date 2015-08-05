@@ -74,9 +74,9 @@ describe('dust-react-helper', function() {
   it('should add properties to the data', function() {
     helper.install(dust);
     helper.setReactDir('test');
-    var compiled = dust.compile('{@react paramStyle=param immStyle="spoon" intStyle="{fork}" component="param_component" /}', 'test');
+    var compiled = dust.compile('{@react param1=param1 param2="spoon" param3="{param3}" component="param_component" /}', 'test');
     dust.loadSource(compiled);
-    dust.render('test', {param: 'foon', fork: 'knife'}, function(err, out) {
+    dust.render('test', {param1: 'foon', param3: 'knife'}, function(err, out) {
       if (err) {
         throw err;
       } else {
