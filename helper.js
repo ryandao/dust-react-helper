@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var ReactDOMServer = require('react-dom/server');
 var path = require('path');
 
 var reactDir;
@@ -20,7 +21,7 @@ var getComponentFactory = memoize(function getComponentFactory(file) {
 
 var renderComponent = function renderComponent(file, props) {
   var factory = getComponentFactory(file);
-  return React.renderToString(factory(props))
+  return ReactDOMServer.renderToString(factory(props))
 }
 
 module.exports = {
