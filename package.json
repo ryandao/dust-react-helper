@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "memoizee": "^0.3.8",
-    "react": "^0.13.3"
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   },
   "devDependencies": {
     "babel": "^5.8.20",
